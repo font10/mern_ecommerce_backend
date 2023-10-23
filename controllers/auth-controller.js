@@ -4,23 +4,22 @@ import jwt from 'jsonwebtoken'
 
 export const signIn = async(req, res) => {
   const { email, password: userPass } = req.body
+
+  if(email === '' || userPass === '') {
+    return res.status(500).json({ message: 'All fields must be populated' })
+  }
   try {
-    if(email === '' || userPass === '') {
-      return res.status(500).json({ message: 'All fields must be populated' })
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ msg: "Invalid credentials" });
+    }
+    const comparePass = await bcrypt.compare(req.body.password, user.password);
+    if (!comparePass) {
+      return res.status(404).json({ msg: "Invalid credentials" });
     }
 
-    const user = await User.findOne({ email })
-    if(!user) {
-      return res.status(500).json({ message: 'Invalid Credentials' })
-    }
-
-    const comparePass = await bcrypt.compare(password, user.password)
-    if(!comparePass) {
-      return res.status(500).json({ message: 'Invalid Credentials' })
-    }
-
-    const [password, ...others] = user._doc
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '8d' })
+    const {password, ...others} = user._doc    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '5h' })
     
     return res.status(200).json({ message: 'Sign in successfully' ,user: others, token })
   } catch (err) {
@@ -44,7 +43,9 @@ export const signUp = async(req, res) => {
     await user.save()
     
     const { password, ...others } = user._doc
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '8d' })
+    const token = jwt.sign({ user: user }, process.env.JWT_SECRET, {
+      expiresIn: "5h"
+    })
 
     return res.status(201).json({ message: 'Sign up successfully' ,user: others, token })
   } catch (err) {
