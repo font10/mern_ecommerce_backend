@@ -27,6 +27,7 @@ export const getProduct = async(req, res) => {
 }
 
 export const createProduct = async(req, res) => {
+  console.log(req.body)
   try {
     const product = await new Product({...req.body});
 

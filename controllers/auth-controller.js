@@ -11,11 +11,11 @@ export const signIn = async(req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ msg: "Invalid credentials" });
+      return res.status(404).json({ message: "Invalid credentials" });
     }
     const comparePass = await bcrypt.compare(req.body.password, user.password);
     if (!comparePass) {
-      return res.status(404).json({ msg: "Invalid credentials" });
+      return res.status(404).json({ message: "Invalid credentials" });
     }
 
     const {password, ...others} = user._doc    
