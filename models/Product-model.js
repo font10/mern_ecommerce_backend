@@ -22,19 +22,19 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  gender: {
+    type: String,
+    require: true,
+  },
   size: {
     type: Array,
     require: true,
-    default: ['35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49']
+    default: ['EU 35', 'EU 35.5', 'EU 36', 'EU 36.5', 'EU 37', 'EU 38', 'EU 39', 'EU 40', 'EU 41', 'EU 42', 'EU 43', 'EU 44', 'EU 44.5', 'EU 45', 'EU 46', 'EU 47', 'EU 48', 'EU 49']
   },
   stars: {
     type: Number,
     default: 3
   },
-  isAdmin: {
-    type: Boolean,
-    default: false
-  }
 }, { timestamps: true })
 
 export const Product = mongoose.model("Product", ProductSchema)
