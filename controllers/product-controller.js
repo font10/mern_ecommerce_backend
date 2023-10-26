@@ -15,7 +15,6 @@ export const getProducts = async(req, res) => {
 export const getProduct = async(req, res) => {
   try {
     const { id } = req.params
-    console.log(id)
     const product = await Product.findById(id)
 
     if(!product) return res.status(404).json({ message: 'No product with this id' })
@@ -27,7 +26,6 @@ export const getProduct = async(req, res) => {
 }
 
 export const createProduct = async(req, res) => {
-  console.log(req.body)
   try {
     const product = await new Product({...req.body});
 

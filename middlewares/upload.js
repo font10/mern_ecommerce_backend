@@ -9,16 +9,17 @@ const storage = multer.diskStorage({
     }
 });  
 
-const fileFilter = (req, file, cb) => {
+/*const fileFilter = (req, file, cb) => {
     if((file.mimetype).includes('jpeg') || (file.mimetype).includes('png') || (file.mimetype).includes('jpg') || (file.mimetype).includes('webp')){
         cb(null, true);
     } else{
         cb(null, false);
 
     }
+};*/
 
-};
 
-let upload = multer({ storage: storage, fileFilter: fileFilter,});
+let upload = multer({ storage: storage });
 
-export default upload.single('image')
+export default upload.array('images', 4)
+
