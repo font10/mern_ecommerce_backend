@@ -1,9 +1,7 @@
 import { Comment } from '../models/Comments-model.js'
 
 export const addComment = async(req, res) => {
-  console.log('comment')
   try {
-    console.log(req.body)
     const product = await new Comment({...req.body});
 
     await product.save();
