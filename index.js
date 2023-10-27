@@ -5,7 +5,7 @@ import { connectDB } from './config/db.js'
 import authRouter from './routes/auth-routes.js'
 import productRouter from './routes/product-routes.js'
 import filesRouter from './routes/files-routes.js'
-import multer from 'multer'
+import commentRouter from './routes/comment-routes.js'
 
 const app = express()
 dotenv.config()
@@ -21,6 +21,7 @@ app.use('/images', express.static('public/images'))
 app.use('/auth', authRouter)
 app.use('/product', productRouter)
 app.use('/files', filesRouter)
+app.use('/comment', commentRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`)
