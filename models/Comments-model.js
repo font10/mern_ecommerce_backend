@@ -11,15 +11,19 @@ const CommentsSchema = new mongoose.Schema({
     ref: 'Product',
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
   comment: {
     type: String,
     required: true,
   },
-  valoration: {
+  rating: {
     type: Number,
     default: 3,
     require: true
   }
 }, { timestamps: true })
 
-export const User = mongoose.model("User", CommentsSchema)
+export const Comment = mongoose.model("Comment", CommentsSchema)
