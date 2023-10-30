@@ -1,11 +1,15 @@
 import { Comment } from '../models/Comments-model.js'
 
 export const addComment = async(req, res) => {
+  console.log(req.body)
   try {
-    const product = await new Comment({...req.body});
+    console.log(1)
+    const comment = await new Comment({...req.body});
+    console.log(2)
 
-    await product.save();
-    return res.status(200).json(product);
+    await comment.save();
+    console.log(3)
+    return res.status(200).json(comment);
   } catch (error) {
     return res.status(500).json({ message: error });
   }
