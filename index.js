@@ -6,6 +6,8 @@ import authRouter from './routes/auth-routes.js'
 import productRouter from './routes/product-routes.js'
 import filesRouter from './routes/files-routes.js'
 import commentRouter from './routes/comment-routes.js'
+import addressRouter from './routes/address-routes.js'
+import orderRouter from './routes/orders-routes.js'
 
 const app = express()
 dotenv.config()
@@ -22,6 +24,8 @@ app.use('/auth', authRouter)
 app.use('/product', productRouter)
 app.use('/files', filesRouter)
 app.use('/comment', commentRouter)
+app.use('/address', addressRouter)
+app.use('/orders', orderRouter)
 
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`)
