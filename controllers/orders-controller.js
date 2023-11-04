@@ -29,14 +29,29 @@ export const getOrders = async(req, res) => {
 export const getOrdersByUser = async(req, res) => {
   try {
     const { id } = req.params
-    const comments = await Order.find({ userId: id })
+    const orders = await Order.find({ userId: id })
       .populate('userId')
       .populate('address')
 
-    if(!comments) return res.status(404).json({ message: 'No orders with this user id' })
+    if(!orders) return res.status(404).json({ message: 'No orders with this user id' })
 
-    return res.status(200).json({ comments })
+    return res.status(200).json({ orders })
   } catch (err) {
+    return res.status(500).json({ message: err.message }) 
+  }
+}
+
+export const deleteOrder = async(req, res) => {
+  try {
+    const { id } = req.params
+    const findOrder = await Order.findByIdAndDelete(id)
+
+    if(!findOrder) {
+      return res.status(400).json({ message: 'Error ocurred when deleting' })
+    }
+    
+    return res.status(200).json({ message: 'Deleted successfully' })
+  } catch (err) { 
     return res.status(500).json({ message: err.message }) 
   }
 }

@@ -23,3 +23,32 @@ export const getCommentsByProduct = async(req, res) => {
     return res.status(500).json({ message: err.message }) 
   }
 }
+
+export const getCommentsByUser = async(req, res) => {
+  try {
+    const { id } = req.params
+    const comments = await Comment.find({ userId: id }).populate('userId').populate('productId')
+
+    if(!comments) return res.status(404).json({ message: 'No comments with this user id' })
+
+    return res.status(200).json({ comments })
+  } catch (err) {
+    return res.status(500).json({ message: err.message }) 
+  }
+}
+
+
+export const deleteComment = async(req, res) => {
+  try {
+    const { id } = req.params
+    const findComment = await Comment.findByIdAndDelete(id)
+
+    if(!findComment) {
+      return res.status(400).json({ message: 'Error ocurred when deleting' })
+    }
+    
+    return res.status(200).json({ message: 'Deleted successfully' })
+  } catch (err) { 
+    return res.status(500).json({ message: err.message }) 
+  }
+}
