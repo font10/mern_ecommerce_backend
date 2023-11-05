@@ -37,6 +37,20 @@ export const getCommentsByUser = async(req, res) => {
   }
 }
 
+export const editComment = async(req, res) => {
+  try {
+    const { id } = req.params
+    const updateAddress = await Comment.findByIdAndUpdate({ _id: id }, req.body)
+
+    if(!updateAddress) {
+      return res.status(400).json({ message: 'Error updating comment' })
+    }
+
+    return res.status(202).json({ message: 'Updated successfully' })
+  } catch (err) {
+    return res.status(500).json({ message: err.message }) 
+  }
+}
 
 export const deleteComment = async(req, res) => {
   try {
