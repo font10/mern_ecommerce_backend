@@ -2,9 +2,8 @@ import { Order } from '../models/Orders-model.js'
 
 export const addOrder = async(req, res) => {
   try {
-    console.log(req.body)
     const order = await new Order({...req.body});
-
+    
     await order.save();
     return res.status(200).json(order);
   } catch (error) {

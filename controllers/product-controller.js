@@ -35,3 +35,33 @@ export const createProduct = async(req, res) => {
     return res.status(500).json({message: error});
   }
 }
+
+export const editProduct = async(req, res) => {
+  try {
+    const { id } = req.params
+    const updateProduct = await Product.findByIdAndUpdate({ _id: id }, req.body)
+
+    if(!updateProduct) {
+      return res.status(400).json({ message: 'Error updating product' })
+    }
+
+    return res.status(202).json({ message: 'Updated successfully' })
+  } catch (err) {
+    return res.status(500).json({ message: err.message }) 
+  }
+}
+
+export const deleteProduct = async(req, res) => {
+  try {
+    const { id } = req.params
+    const findProduct = await Product.findByIdAndDelete(id)
+
+    if(!findProduct) {
+      return res.status(400).json({ message: 'Error ocurred when deleting' })
+    }
+    
+    return res.status(200).json({ message: 'Deleted successfully' })
+  } catch (err) { 
+    return res.status(500).json({ message: err.message }) 
+  }
+}
