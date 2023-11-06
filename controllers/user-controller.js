@@ -21,9 +21,6 @@ export const changePasswordUser = async(req, res) => {
   try {
     const { id } = req.params
 
-    console.log(req.params)
-    console.log(req.body)
-
     if(req.body.password === '' && req.body.confirmPassword === '') {
       return res.status(500).json({ message: 'All fields must be populated' })
     }

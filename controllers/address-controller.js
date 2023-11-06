@@ -55,7 +55,6 @@ export const editAddress = async(req, res) => {
 export const deleteAddress = async(req, res) => {
   try {
     const { id } = req.params
-    console.log(id)
     const findAddress = await Address.findByIdAndDelete(id)
 
     if(!findAddress) {
