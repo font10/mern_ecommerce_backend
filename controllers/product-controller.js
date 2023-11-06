@@ -14,8 +14,6 @@ export const getProducts = async(req, res) => {
 
 export const getProductsMultipleConditions = async(req, res) => {
   try {
-    console.log(req.query)
-    //{ price: {$gte: 40, $lte: 140} }
     const products = await Product.find(req.query)
 
     if(!products.length > 0) return res.status(404).json({ message: 'No products' })
