@@ -9,9 +9,9 @@ export const verifyToken = async(req, res, next) => {
     //* Separate the token from Bearer
     const token = req.headers.authorization.split(" ")[1]
     //* Verify the token
-    console.log(token)
+    console.log(process.env.JWT_SECRET)
     jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
-        if(err) return res.status(403).json({msg: "Wrong or expired token"})
+        if(err) return res.status(403).json({msg: "Wrong or expired token!!!!"})
         else {
           //* Object with the user info
           req.user = data // an object with the user id as its only property -> data = {id: .....}
