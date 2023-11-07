@@ -10,7 +10,7 @@ export const firstImg = (req, res) => {
 }
 
 function saveImage(file) {
-  const newPath = `./public/images/${file.originalname}`
+  const newPath = `./assets/images/${file.originalname}`
   fs.renameSync(file.path, newPath)
   return newPath
 }
