@@ -29,6 +29,10 @@ app.use('/address', addressRouter)
 app.use('/orders', orderRouter)
 app.use('/user', userRouter)
 
+app.get("/", function(req, res) {
+  res.status(200).send("Welcome to the restful API");
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`)
 })
