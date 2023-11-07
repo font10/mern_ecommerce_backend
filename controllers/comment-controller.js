@@ -2,6 +2,7 @@ import { Comment } from '../models/Comments-model.js'
 
 export const addComment = async(req, res) => {
   try {
+    console.log(req.body)
     const comment = await new Comment({...req.body});
 
     await comment.save();
