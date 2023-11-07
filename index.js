@@ -9,7 +9,9 @@ import commentRouter from './routes/comment-routes.js'
 import addressRouter from './routes/address-routes.js'
 import orderRouter from './routes/orders-routes.js'
 import userRouter from './routes/users-routes.js'
+import path from 'path'
 
+const __dirname = path.resolve()
 const app = express()
 dotenv.config()
 
@@ -20,7 +22,7 @@ connectDB()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use('/images', express.static('./public/images'))
+app.use('/images', express.static(path.join(__dirname, 'public/images')))
 app.use('/auth', authRouter)
 app.use('/product', productRouter)
 app.use('/files', filesRouter)
