@@ -18,7 +18,7 @@ connectDB()
 
 //? Middlewares
 app.use(cors({
-  origin: ['https://mern-ecommerce-backend-6mzkskdm3-umai-backend.vercel.app/'],
+  origin: ['http://mern-ecommerce-backend-6mzkskdm3-umai-backend.vercel.app'],
   methods: ["POST", "GET", "PATCH", "DELETE"],
   credentials: true
 }))
