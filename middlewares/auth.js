@@ -10,7 +10,7 @@ export const verifyToken = async(req, res, next) => {
     const token = req.headers.authorization.split(" ")[1]
     //* Verify the token
     console.log(process.env.JWT_SECRET)
-    jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+    jwt.verify(token, "ab12cd3ef45gh6ij7kl89mn10", (err, data) => {
         if(err) return res.status(403).json({msg: "Wrong or expired token!!!!"})
         else {
           //* Object with the user info
