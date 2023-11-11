@@ -31,25 +31,23 @@ export const signUp = async(req, res) => {
   console.log(req.body)
   try {
     const isExisting = await User.findOne({ email: req.body.email })
-    console.log(1)
+    
     if(isExisting) return res.status(500).json({ message: 'User has been already registered'})
-    console.log(2)
 
     if(req.body.username === '' || req.body.email === '' || req.body.password === '') {
       return res.status(500).json({ message: 'All fields must be populated' })
     }
-    console.log(3)
+    
     const hashedPassword = await bcrypt.hash( req.body.password, 10)
-    console.log(3.5)
+    
     const user = await User.create({ ...req.body, password: hashedPassword })
-    console.log(4)
+    
     await user.save()
-    console.log(5)
+    
     const { password, ...others } = user._doc
     const token = jwt.sign({ user: user }, process.env.JWT_SECRET, {
       expiresIn: "5h"
     })
-    console.log(6)
 
     return res.status(201).json({ message: 'Sign up successfully' ,user: others, token })
   } catch (err) {
