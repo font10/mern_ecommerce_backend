@@ -15,9 +15,3 @@ export const deleteImageById = async(req, res) => {
   if( result === 'ok') res.status(200).json({ message: 'Deleted successfully' })
   else res.status(500).json({ message: 'Error deleting the image' })
 }
-
-/*function saveImage(file) {
-  const newPath = `/public/images/${file.originalname}`
-  fs.renameSync(file.path, newPath)
-  return newPath
-}*/
