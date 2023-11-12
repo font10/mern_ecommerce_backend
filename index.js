@@ -34,20 +34,6 @@ app.get("/", function(req, res) {
   res.status(200).send("Welcome to the restful API");
 });
 
-app.use(( error, req, res, next ) => {
-  if(error instanceof multer.MulterError) {
-     if(error.code === "LIMIT_FILE_SIZE") {
-      return res.status(400).json({ message: 'File is too large' })
-     }
-     if(error.code === "LIMIT_FILE_COUNT") {
-      return res.status(400).json({ message: 'File limit reached, max 2 files' })
-     }
-     if(error.code === "LIMIT_UNEXPECTED_FILE") {
-      return res.status(400).json({ message: 'File must be of image type' })
-     }
-  }
-})
-
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`)
 })
