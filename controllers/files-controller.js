@@ -1,9 +1,9 @@
-import fs from 'fs'
 import { uploadImage, deleteImage } from '../cloudinary/cloudinary.js'
 
 export const uploadImages = async(req, res) => {
   try {
     const images = await uploadImage(req.files)
+    
     res.status(200).json({ message: 'Image uploaded successfully', images })
   } catch (err) {
     return res.status(500).json({ message: err.message })
